@@ -1,0 +1,43 @@
+{
+    "app.title": "Bio-Scope",
+    "general.error": "Se ha producido un error. Vuelva a intentarlo más tarde.",
+    "header": {
+        "welcome": "Bienvenido",
+        "nav": {
+            "home": "Inicio",
+            "movies": "cine",
+            "login": "Conéctese",
+            "logout": "Cerrar sesión"
+        }
+    },
+    "login": {
+        "title": "Inicio de sesión",
+        "button": "Conéctese",
+        "success": "Inicio de sesión exitoso. Redirigiendo a la página de inicio...",
+        "validate": {"name": "Nombre obligatorio",
+        "password": "Se requiere contraseña"
+        },
+        "label": { "username": "Nombre de usuario:", "password": "Contraseña:" }
+    },
+    "lecturers": {
+        "title": "Profesores",
+        "selectedLecturer.text": "Cursos impartidos por",
+        "unauthorized": "No estás autorizado para ver esta página",
+        "overview": {
+            "firstname": "Nombre",
+            "lastname": "Apellido",
+            "e-mail": "Correo electrónico",
+            "expertise": "Especialización"
+        },
+        "courses": {
+            "overview": {
+                "name": "Nombre",
+                "description": "Descripción",
+                "phase": "Fase",
+                "credits": "Créditos",
+                "button": "Horario"
+            }
+        }
+    }
+
+}
