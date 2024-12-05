@@ -1,24 +1,27 @@
-import {User as UserPrisma} from "@prisma/client";
+import { User as UserPrisma } from '@prisma/client';
+import { Role } from '../types';
 
 export class User {
     private id?: number;
     private username: string;
-    private email: string;
     private password: string;
-    //private role: Role;
+    private email: string;
+    private role: Role;
 
     constructor(user: {
         id?: number;
         username: string;
-        email: string;
         password: string;
-        //role: Role;
+        email: string;
+        role: Role;
     }) {
+        this.validate(user);
+
         this.id = user.id;
         this.username = user.username;
-        this.email = user.email;
         this.password = user.password;
-        //this.role = user.role;
+        this.email = user.email;
+        this.role = user.role;
     }
 
     getId(): number | undefined {
@@ -37,28 +40,41 @@ export class User {
         return this.password;
     }
 
+    getRole(): Role {
+        return this.role;
+    }
 
+    validate(user: { username: string; email: string; password: string; role: Role }) {
+        if (!user.username?.trim()) {
+            throw new Error('Username is required');
+        }
+        if (!user.email?.trim()) {
+            throw new Error('Email is required');
+        }
+        if (!user.password?.trim()) {
+            throw new Error('Password is required');
+        }
+        if (!user.role) {
+            throw new Error('Role is required');
+        }
+    }
 
     equals(user: User): boolean {
         return (
             this.username === user.getUsername() &&
             this.email === user.getEmail() &&
-            this.password === user.getPassword()
+            this.password === user.getPassword() &&
+            this.role === user.getRole()
         );
     }
 
-
-    static from({
-        id,
-        username,
-        email,
-        password,
-    }: UserPrisma) {
-        return new User ({
+    static from({ id, username, password, email, role }: UserPrisma) {
+        return new User({
             id,
             username,
-            email,
             password,
-        })
+            email,
+            role: role as Role,
+        });
     }
 }

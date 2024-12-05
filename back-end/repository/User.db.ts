@@ -3,17 +3,15 @@ import { User } from '../model/User';
 
 const database = new PrismaClient();
 
-
 const getAllUsers = async (): Promise<User[]> => {
     try {
         const usersPrisma = await database.user.findMany({});
         return usersPrisma.map((userPrisma) => User.from(userPrisma));
     } catch (error) {
         console.error(error);
-        throw new Error("Database error. See server log for details.");
+        throw new Error('Database error. See server log for details.');
     }
 };
-
 
 const getUserById = async (id: number): Promise<User | null> => {
     try {
@@ -23,29 +21,42 @@ const getUserById = async (id: number): Promise<User | null> => {
         return userPrisma ? User.from(userPrisma) : null;
     } catch (error) {
         console.error(error);
-        throw new Error("Database error. See server log for details.");
+        throw new Error('Database error. See server log for details.');
     }
 };
 
+const getUserByUsername = async ({ username }: { username: string }): Promise<User | null> => {
+    try {
+        const userPrisma = await database.user.findFirst({
+            where: { username },
+        });
 
-const addUser = async (username: string, email: string, password: string): Promise<User> => {
+        return userPrisma ? User.from(userPrisma) : null;
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+const createUser = async (user: User): Promise<User> => {
     try {
         const userPrisma = await database.user.create({
             data: {
-                username,
-                email,
-                password,
+                username: user.getUsername(),
+                email: user.getEmail(),
+                password: user.getPassword(),
             },
         });
         return User.from(userPrisma);
     } catch (error) {
         console.error(error);
-        throw new Error("Database error. See server log for details.");
+        throw new Error('Database error. See server log for details.');
     }
 };
 
 export default {
     getAllUsers,
     getUserById,
-    addUser,
+    getUserByUsername,
+    createUser,
 };
