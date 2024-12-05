@@ -16,10 +16,6 @@ const port = process.env.APP_PORT || 3000;
 app.use(cors({ origin: 'http://localhost:8080' }));
 app.use(bodyParser.json());
 
-app.get('/status', (req, res) => {
-    res.json({ message: 'Back-end is running...' });
-});
-
 app.use(
     expressjwt({
         secret: process.env.JWT_SECRET || 'default_secret',
@@ -30,6 +26,10 @@ app.use(
 );
 
 app.use('/movies', movieRouter);
+
+app.get('/status', (req, res) => {
+    res.json({ message: 'Back-end is running...' });
+});
 
 const swaggerOpts = {
     definition: {
