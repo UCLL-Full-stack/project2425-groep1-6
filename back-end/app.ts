@@ -6,8 +6,10 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { movieRouter } from './controller/Movies.routes';
 import { expressjwt } from 'express-jwt';
+import helmet from 'helmet';
 
 const app = express();
+app.user(helmet);
 dotenv.config();
 const port = process.env.APP_PORT || 3000;
 
