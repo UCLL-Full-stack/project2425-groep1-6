@@ -14,6 +14,10 @@ const port = process.env.APP_PORT || 3000;
 app.use(cors({ origin: 'http://localhost:8080' }));
 app.use(bodyParser.json());
 
+app.get('/status', (req, res) => {
+    res.json({ message: 'Back-end is running...' });
+});
+
 app.use(
     expressjwt({
         secret: process.env.JWT_SECRET || 'default_secret',
@@ -46,9 +50,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     } else {
         res.status(400).json({ status: 'application error', message: err.message });
     }
-});
-app.get('/status', (req, res) => {
-    res.json({ message: 'Back-end is running...' });
 });
 
 app.listen(port || 3000, () => {
