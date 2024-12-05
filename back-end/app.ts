@@ -9,7 +9,7 @@ import { expressjwt } from 'express-jwt';
 import helmet from 'helmet';
 
 const app = express();
-app.user(helmet);
+app.use(helmet);
 dotenv.config();
 const port = process.env.APP_PORT || 3000;
 
