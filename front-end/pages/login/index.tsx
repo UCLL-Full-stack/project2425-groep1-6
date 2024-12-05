@@ -12,7 +12,7 @@ const Login: React.FC = () => {
       <Header />
       <main>
         <h1 className="flex justify-center text-4xl pt-5">Login</h1>
-        <UserLoginForm></UserLoginForm>
+        <UserLoginForm />
       </main>
     </>
   );

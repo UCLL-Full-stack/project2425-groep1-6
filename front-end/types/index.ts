@@ -34,8 +34,13 @@ export type Ticket = {
 
 export type User = {
   id?: number;
-  username: string;
-  email: string;
-  password: string;
-  role: Role;
+  username?: string;
+  password?: string;
+  email?: string;
+  role?: Role;
+};
+
+export type StatusMessage = {
+  message: string;
+  type: "error" | "success";
 };
