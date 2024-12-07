@@ -12,14 +12,13 @@ const Login: React.FC = () => {
       </Head>
       <Header />
       <main>
-        <h1 className="flex justify-center text-4xl pt-5">Login</h1>
         <UserLoginForm />
       </main>
     </>
   );
 };
 
-export const getServerSideProps = async (context: { locale: any }) => {
+export const getServerSideProps = async (context) => {
   const { locale } = context;
 
   return {

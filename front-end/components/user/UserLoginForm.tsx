@@ -6,13 +6,16 @@ import UserService from "@/services/userService";
 import classNames from "classnames";
 
 const UserLoginForm: React.FC = () => {
-  const { t } = useTranslation("common");
+  const { t, i18n } = useTranslation("common"); // Ensure the namespace is "common"
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [nameError, setNameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [statusMessages, setStatusMessages] = useState<StatusMessage[]>([]);
   const router = useRouter();
+
+  console.log("current language:", i18n.language);
+  //console.log("Translation:", i18n.store.data);
 
   const clearErrors = () => {
     setNameError(null);
