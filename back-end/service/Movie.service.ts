@@ -6,19 +6,25 @@ const getAllMovies = async (): Promise<Movie[]> => {
 };
 
 const getMovieById = async (id: number): Promise<Movie> => {
-    const movie = movieDb.getMovieById(id);
+    const movie = await movieDb.getMovieById(id);
     if (!movie) {
-        throw new Error(`Movie with id ${id} does not exist.`); 
+        throw new Error(`Movie with id ${id} does not exist.`);
     }
     return movie;
-}
+};
 
-const addMovie = async (name:String, duration:Date, playingdates:Array<Date>, genre: String, summary:String): Promise<Movie> => {
-    return movieDb.addMovie(name,duration,playingdates,genre,summary);
-  };
+const addMovie = async (
+    name: string,
+    duration: Date,
+    playingdates: Array<Date>,
+    genre: string,
+    summary: string
+): Promise<Movie> => {
+    return movieDb.addMovie(name, duration, playingdates, genre, summary);
+};
 
-export default { 
+export default {
     getAllMovies,
     getMovieById,
-    addMovie
+    addMovie,
 };

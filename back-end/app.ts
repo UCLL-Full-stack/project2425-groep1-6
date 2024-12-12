@@ -6,10 +6,11 @@ import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { movieRouter } from './controller/Movies.routes';
 import { expressjwt } from 'express-jwt';
+import { userRouter } from './controller/User.routes';
 import helmet from 'helmet';
 
 const app = express();
-app.use(helmet);
+app.use(helmet());
 dotenv.config();
 const port = process.env.APP_PORT || 3000;
 
@@ -26,6 +27,7 @@ app.use(
 );
 
 app.use('/movies', movieRouter);
+app.use('/users', userRouter);
 
 app.get('/status', (req, res) => {
     res.json({ message: 'Back-end is running...' });

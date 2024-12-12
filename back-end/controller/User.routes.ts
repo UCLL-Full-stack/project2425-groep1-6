@@ -1,23 +1,67 @@
 /**
  * @swagger
  *   components:
+ *    securitySchemes:
+ *     bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
  *    schemas:
+ *      AuthenticationResponse:
+ *          type: object
+ *          properties:
+ *            message:
+ *              type: string
+ *              description: Authentications response.
+ *            token:
+ *              type: string
+ *              description: JWT access token.
+ *            username:
+ *              type: string
+ *              description: User name.
+ *      AuthenticationRequest:
+ *          type: object
+ *          properties:
+ *            username:
+ *              type: string
+ *              description: User name.
+ *            password:
+ *              type: string
+ *              description: User password.
  *      User:
  *          type: object
  *          properties:
  *            id:
  *              type: number
  *              format: int64
- *              description: Unique identifier for the user.
  *            username:
  *              type: string
- *              description: The username of the user.
- *            email:
- *              type: string
- *              description: The user's email address.
+ *              description: User name.
  *            password:
  *              type: string
- *              description: The user's password (should be hashed in practice).
+ *              description: User password.
+ *            email:
+ *              type: string
+ *              description: User email.
+ *            role:
+ *               $ref: '#/components/schemas/Role'
+ *      UserInput:
+ *          type: object
+ *          properties:
+ *            username:
+ *              type: string
+ *              description: User name.
+ *            password:
+ *              type: string
+ *              description: User password.
+ *            email:
+ *              type: string
+ *              description: E-mail.
+ *            role:
+ *               $ref: '#/components/schemas/Role'
+ *      Role:
+ *          type: string
+ *          enum: [user, worker, admin, guest]
  */
 
 import express, { NextFunction, Request, Response } from 'express';
@@ -30,7 +74,9 @@ const userRouter = express.Router();
  * @swagger
  * /users:
  *   get:
- *     summary: Get a list of all users.
+ *     security:
+ *       - bearerAuth: []
+ *     summary: Get a list of all users
  *     responses:
  *       200:
  *         description: A list of users.
@@ -108,7 +154,7 @@ userRouter.post('/login', async (req: Request, res: Response, next: NextFunction
     try {
         const userInput = <UserInput>req.body;
         const response = await userService.authenticate(userInput);
-        res.status(200).json({ message: 'Authentication succesful', ...response });
+        res.status(200).json({ message: 'Authentication successful', ...response });
     } catch (error) {
         next(error);
     }

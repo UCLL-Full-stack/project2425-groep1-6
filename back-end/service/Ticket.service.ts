@@ -6,14 +6,14 @@ const getAllTickets = async (): Promise<Ticket[]> => {
 };
 
 const getTicketById = async (id: number): Promise<Ticket> => {
-    const ticket = ticketDb.getTicketById(id);
+    const ticket = await ticketDb.getTicketById(id);
     if (!ticket) {
         throw new Error(`Ticket with id ${id} does not exist.`);
     }
     return ticket;
-}
+};
 
-export default { 
+export default {
     getAllTickets,
-    getTicketById
+    getTicketById,
 };

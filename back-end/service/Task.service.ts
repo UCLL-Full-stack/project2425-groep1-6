@@ -6,14 +6,14 @@ const getAllTasks = async (): Promise<Task[]> => {
 };
 
 const getTaskById = async (id: number): Promise<Task> => {
-    const task = taskDb.getTaskById(id);
+    const task = await taskDb.getTaskById(id);
     if (!task) {
         throw new Error(`Task with id ${id} does not exist.`);
     }
     return task;
-}
+};
 
-export default { 
+export default {
     getAllTasks,
-    getTaskById
+    getTaskById,
 };

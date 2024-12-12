@@ -6,14 +6,14 @@ const getAllRooms = async (): Promise<Room[]> => {
 };
 
 const getRoomById = async (id: number): Promise<Room> => {
-    const room = roomDb.getRoomById(id);
+    const room = await roomDb.getRoomById(id);
     if (!room) {
         throw new Error(`Room with id ${id} does not exist.`);
     }
     return room;
-}
+};
 
-export default { 
+export default {
     getAllRooms,
-    getRoomById
+    getRoomById,
 };
