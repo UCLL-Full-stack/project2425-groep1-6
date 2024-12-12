@@ -1,21 +1,16 @@
 import { useRouter } from "next/router";
 import { StatusMessage } from "../../types";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
 import UserService from "@/services/userService";
 import classNames from "classnames";
 
 const UserLoginForm: React.FC = () => {
-  const { t, i18n } = useTranslation("common"); // Ensure the namespace is "common"
   const [name, setName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [nameError, setNameError] = useState<string | null>(null);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [statusMessages, setStatusMessages] = useState<StatusMessage[]>([]);
   const router = useRouter();
-
-  console.log("current language:", i18n.language);
-  //console.log("Translation:", i18n.store.data);
 
   const clearErrors = () => {
     setNameError(null);
@@ -27,12 +22,12 @@ const UserLoginForm: React.FC = () => {
     let result = true;
 
     if (!name && name.trim() === "") {
-      setNameError(t("login.validate.name"));
+      setNameError("Name is required");
       result = false;
     }
 
     if (!password && password.trim() === "") {
-      setPasswordError(t("login.validate.password"));
+      setPasswordError("Password is required");
       result = false;
     }
 
@@ -68,7 +63,7 @@ const UserLoginForm: React.FC = () => {
 
         setStatusMessages([
           {
-            message: t("login.success"),
+            message: "Login successful. Redirecting to homepage...",
             type: "success",
           },
         ]);
@@ -79,7 +74,7 @@ const UserLoginForm: React.FC = () => {
       } else {
         setStatusMessages([
           {
-            message: t("general.error"),
+            message: "An error has occurred. Please try again later.",
             type: "error",
           },
         ]);
@@ -87,7 +82,7 @@ const UserLoginForm: React.FC = () => {
     } catch (error) {
       setStatusMessages([
         {
-          message: t("general.error"),
+          message: "An error has occurred. Please try again later.",
           type: "error",
         },
       ]);
@@ -96,7 +91,7 @@ const UserLoginForm: React.FC = () => {
 
   return (
     <>
-      <h3 className="px-0">{t("login.title")}</h3>
+      <h3 className="px-0">Login</h3>
       {statusMessages && (
         <div className="row">
           <ul className="list-none mb-3 mx-auto ">
@@ -116,7 +111,7 @@ const UserLoginForm: React.FC = () => {
       )}
       <form onSubmit={handleSubmit}>
         <label htmlFor="nameInput" className="block mb-2 text-sm font-medium">
-          {t("login.label.username")}
+          Username:
         </label>
         <div className="block mb-2 text-sm font-medium">
           <input
@@ -134,7 +129,7 @@ const UserLoginForm: React.FC = () => {
               htmlFor="passwordInput"
               className="block mb-2 text-sm font-medium"
             >
-              {t("login.label.password")}
+              Password:
             </label>
           </div>
           <div className="block mb-2 text-sm font-medium">
@@ -154,7 +149,7 @@ const UserLoginForm: React.FC = () => {
           className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           type="submit"
         >
-          {t("login.button")}
+          Login
         </button>
       </form>
     </>
