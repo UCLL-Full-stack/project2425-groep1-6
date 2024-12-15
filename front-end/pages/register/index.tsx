@@ -12,8 +12,10 @@ const Register: React.FC = () => {
       <Header />
       <main>
         <h1 className="flex justify-center text-4xl pt-5">Register</h1>
-        <UserRegistrationForm></UserRegistrationForm>
+        <UserRegistrationForm />
       </main>
     </>
   );
 };
+
+export default Register;
