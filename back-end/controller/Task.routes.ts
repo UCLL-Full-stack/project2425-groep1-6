@@ -59,6 +59,57 @@ taskRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
 
 /**
  * @swagger
+ * /tasks:
+ *   post:
+ *     summary: Add a new task.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               date:
+ *                 type: string
+ *                 format: date
+ *               time:
+ *                 type: string
+ *                 format: time
+ *               description:
+ *                 type: string
+ *               status:
+ *                 type: string
+ *               comment:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Task created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Task'
+ *       400:
+ *         description: Invalid input.
+ */
+taskRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { date, time, description, status, comment, roomId } = req.body;
+        const newTask = await taskService.addTask(
+            new Date(date),
+            new Date(time),
+            description,
+            status,
+            comment,
+            roomId
+        );
+        res.status(200).json(newTask);
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * @swagger
  * /tasks/{id}:
  *  get:
  *      summary: Get a task by its ID.
@@ -83,7 +134,7 @@ taskRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
     try {
         const task = await taskService.getTaskById(Number(req.params.id));
         if (!task) {
-            res.status(404).json({ message: "Task not found" });
+            res.status(404).json({ message: 'Task not found' });
             return;
         }
         res.status(200).json(task);
