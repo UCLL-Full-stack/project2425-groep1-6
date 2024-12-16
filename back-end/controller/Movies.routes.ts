@@ -45,6 +45,8 @@ const movieRouter = express.Router();
  * /movies:
  *   get:
  *     summary: Get a list of all movies.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of movies.
