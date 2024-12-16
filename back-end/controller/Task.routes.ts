@@ -1,6 +1,11 @@
 /**
  * @swagger
  *   components:
+ *    securitySchemes:
+ *     bearerAuth:
+ *      type: http
+ *      scheme: bearer
+ *      bearerFormat: JWT
  *    schemas:
  *      Task:
  *          type: object
@@ -38,6 +43,8 @@ const taskRouter = express.Router();
  * /tasks:
  *   get:
  *     summary: Get a list of all tasks.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of tasks.
@@ -62,6 +69,8 @@ taskRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
  * /tasks:
  *   post:
  *     summary: Add a new task.
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -113,6 +122,8 @@ taskRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
  * /tasks/{id}:
  *  get:
  *      summary: Get a task by its ID.
+ *      security:
+ *        - bearerAuth: []
  *      parameters:
  *          - in: path
  *            name: id
