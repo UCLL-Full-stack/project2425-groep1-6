@@ -1,14 +1,37 @@
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import { Movie } from "@/types";
+import MovieService from "@/services/movieService";
 
-type Props = {
-  movies: Array<Movie> | null | undefined; // Toegestane types voor robustness
-};
+const MovieOverviewTable: React.FC = () => {
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
-const MovieOverviewTable: React.FC<Props> = ({ movies }: Props) => {
-  if (!Array.isArray(movies) || movies.length === 0) {
-    return <p>No movies available.</p>; // Fallback voor geen data
-  }
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const token = sessionStorage.getItem("loggedInUserToken");
+        if (!token) {
+          throw new Error("No token found");
+        }
+
+        const response = await MovieService.getAllMovies(token);
+        if (!response.ok) {
+          throw new Error(`Could not fetch movies. Status: ${response.status}`);
+        }
+        const data = await response.json();
+        if (Array.isArray(data)) {
+          setMovies(data);
+        } else {
+          throw new Error("Fetched data is not an array");
+        }
+      } catch (error) {
+        setError(error.message);
+        console.error("Error fetching movies:", error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
 
   return (
     <table className="table table-hover">

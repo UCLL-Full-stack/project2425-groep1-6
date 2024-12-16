@@ -1,3 +1,4 @@
+import { Role } from "@/types";
 import { useRouter } from "next/router";
 import { StatusMessage } from "../../types";
 import { useState } from "react";
@@ -57,7 +58,7 @@ const UserRegistrationForm: React.FC = () => {
         username,
         password,
         email,
-        role,
+        role: role as Role,
       });
 
       if (response.status === 200) {
