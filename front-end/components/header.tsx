@@ -45,9 +45,7 @@ const Header: React.FC = () => {
         </span>
         <nav className="flex items-center">
           {[
-            { href: "/", label: "Home" },
-            { href: "/movies", label: "Movies" },
-            { href: "/tasks", label: "Tasks" },
+            { href: "/", label: "Home" }
           ].map((link) => (
             <Link
               key={link.href}
@@ -60,6 +58,18 @@ const Header: React.FC = () => {
 
           {isLoggedIn ? (
             <>
+          {[
+            { href: "/movies", label: "Movies" },
+            { href: "/tasks", label: "Tasks" },
+          ].map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={getLinkClasses(link.href)}
+            >
+              {link.label}
+            </Link>
+          ))}            
               <Link
                 href="#"
                 onClick={(e) => {
