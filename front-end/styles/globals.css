@@ -1,3 +1,4 @@
+/* globals.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,13 +7,21 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  background: linear-gradient(135deg, #491d8f, #5541c8);
+  color: #ffffff;
+  overflow-x: hidden;
 }
 
 a {
-  color: inherit;
+  color: #b09fff;
   text-decoration: none;
+}
+
+a:hover {
+  color: #e0b3ff;
+  text-decoration: underline;
 }
 
 * {
@@ -22,15 +31,19 @@ a {
 img {
   max-width: 100%;
   height: auto;
+  border-radius: 0.5rem;
 }
 
 h1 {
-  color: rgb(46, 50, 117);
+  color: #d9b3ff;
+  font-size: 2.5rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 2rem !important;
 }
 
 h2 {
-  font-size: 1.25rem !important;
+  font-size: 1.5rem !important;
+  color: #c499ff;
 }
 
 h1,
@@ -39,6 +52,12 @@ p,
 ul {
   margin: 0;
 }
+p, label {
+  color: #c499ff;
+}
+input, textarea {
+  margin-left: 1rem;
+}
 
 ul {
   padding: 0;
@@ -46,6 +65,17 @@ ul {
 }
 
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.7rem 1.5rem;
   font-weight: bold;
+  background: #6a0dad;
+  border: none;
+  border-radius: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:hover {
+  background: #8532ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }

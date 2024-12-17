@@ -48,9 +48,9 @@ const MovieForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleAddMovie}>
+    <form onSubmit={handleAddMovie} className="block w-full">
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <div className="p-1">
+      <div className="p-1 block mb-2 text-sm font-medium">
         <label>
           {t("movies.form.name")}
           <input
@@ -58,10 +58,11 @@ const MovieForm: React.FC = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
+            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </label>
       </div>
-      <div className="p-1">
+      <div className="p-1 block mb-2 text-sm font-medium">
         <label>
           {t("movies.form.duration")}
           <input
@@ -69,13 +70,14 @@ const MovieForm: React.FC = () => {
             value={duration.getTime()}
             onChange={(e) => setDuration(new Date(e.target.value))}
             required
+            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </label>
       </div>
-      <div className="p-1">
+      <div className="p-1 block mb-2 text-sm font-medium">
         <label>
           {t("movies.form.playingdates")}
-          <input type="date" onChange={handleAddPlayingDate} />
+          <input type="date" onChange={handleAddPlayingDate} className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"/>
           <ul>
             {playingdates.map((date, index) => (
               <li key={index}>{date.toISOString().substring(0, 10)}</li>
@@ -83,7 +85,7 @@ const MovieForm: React.FC = () => {
           </ul>
         </label>
       </div>
-      <div className="p-1">
+      <div className="p-1 block mb-2 text-sm font-medium">
         <label>
           {t("movies.form.genre")}
           <input
@@ -91,16 +93,18 @@ const MovieForm: React.FC = () => {
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
             required
+            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </label>
       </div>
-      <div className="p-1">
+      <div className="p-1 block mb-2 text-sm font-medium">
         <label>
           {t("movies.form.summary")}
           <textarea
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
             required
+            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </label>
       </div>

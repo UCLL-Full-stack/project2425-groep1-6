@@ -10,6 +10,11 @@
             "logout": "Logout"
         }
     },
+    
+    "home":{
+        "welcome": "Welcome to Bio-Scope!",
+        "introduction": "Bio-Scope is more than just a movie theater; it’s a destination for film lovers. From the latest blockbusters to timeless classics, we bring a rich selection of films to the screen, offering a unique viewing experience for all ages. Relax in our comfortable theaters, enjoy state-of-the-art sound and visuals, and let us take you on a cinematic journey. Join us for an unforgettable night out at the movies!"
+    },
 
     "login": {
         "title": "Login",

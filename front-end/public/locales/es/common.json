@@ -11,6 +11,11 @@
         }
     },
 
+    "home": {
+        "welcome": "¡Bienvenido a Bio-Scope!",
+        "introduction": "Bio-Scope es más que solo un cine; es un destino para los amantes del cine. Desde los últimos éxitos de taquilla hasta los clásicos atemporales, ofrecemos una rica selección de películas en la pantalla, brindando una experiencia única de visualización para todas las edades. Relájate en nuestras cómodas salas, disfruta de sonido e imágenes de última generación, y permítenos llevarte a un viaje cinematográfico. ¡Únete a nosotros para una noche inolvidable en el cine!"
+    },
+    
     "login": {
         "title": "Iniciar sesión",
         "button": "Iniciar sesión",

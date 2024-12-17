@@ -1,22 +1,36 @@
 /**
  * @swagger
- *   components:
- *    schemas:
- *      Room:
- *          type: object
- *          properties:
- *            id:
- *              type: number
- *              format: int64
- *              description: Unique identifier for the room.
- *            name:
- *              type: string
- *              description: The name of the room.
- *            chairs:
- *              type: array
- *              items:
- *                type: number
- *              description: List of chair numbers in the room.
+ * components:
+ *   schemas:
+ *     Room:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *           format: int64
+ *           description: Unique identifier for the room.
+ *         name:
+ *           type: string
+ *           description: The name of the room.
+ *         chairs:
+ *           type: array
+ *           items:
+ *             type: number
+ *           description: List of chair numbers in the room.
+ *     RoomCreateRequest:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the room.
+ *         chairs:
+ *           type: array
+ *           items:
+ *             type: number
+ *           description: List of chair numbers in the room.
+ *       required:
+ *         - name
+ *         - chairs
  */
 
 import express, { NextFunction, Request, Response } from 'express';
@@ -37,7 +51,7 @@ const roomRouter = express.Router();
  *             schema:
  *               type: array
  *               items:
- *                  $ref: '#/components/schemas/Room'
+ *                 $ref: '#/components/schemas/Room'
  */
 roomRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -51,24 +65,24 @@ roomRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
 /**
  * @swagger
  * /rooms/{id}:
- *  get:
- *      summary: Get a room by its ID.
- *      parameters:
- *          - in: path
- *            name: id
- *            schema:
- *              type: integer
- *              required: true
- *              description: The room ID.
- *      responses:
- *          200:
- *              description: A room object.
- *              content:
- *                  application/json:
- *                      schema:
- *                          $ref: '#/components/schemas/Room'
- *          404:
- *              description: Room not found.
+ *   get:
+ *     summary: Get a room by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *           required: true
+ *           description: The room ID.
+ *     responses:
+ *       200:
+ *         description: A room object.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Room'
+ *       404:
+ *         description: Room not found.
  */
 roomRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {

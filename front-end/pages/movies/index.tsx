@@ -41,7 +41,7 @@ const Movies: React.FC = () => {
   return (
     <>
       <Head>
-        <title>{t("movies.title")}</title>
+        <title>{t("app.title")}</title>
       </Head>
       <Header />
       <main className="d-flex flex-column justify-content-center align-items-center">

@@ -1,38 +1,65 @@
 /**
  * @swagger
- *   components:
- *    securitySchemes:
+ * components:
+ *   securitySchemes:
  *     bearerAuth:
- *      type: http
- *      scheme: bearer
- *      bearerFormat: JWT
- *    schemas:
- *      Movie:
- *          type: object
- *          properties:
- *            id:
- *              type: number
- *              format: int64
- *              description: Unique identifier for the movie.
- *            name:
- *              type: string
- *              description: The name of the movie.
- *            duration:
- *              type: string
- *              format: date-time
- *              description: The duration or release date of the movie.
- *            playingdates:
- *              type: array
- *              items:
- *                type: string
- *                format: date-time
- *              description: List of dates when the movie is playing.
- *            genre:
- *              type: string
- *              description: Genre of the movie.
- *            summary:
- *              type: string
- *              description: A brief summary of the movie plot.
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *   schemas:
+ *     Movie:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: number
+ *           format: int64
+ *           description: Unique identifier for the movie.
+ *         name:
+ *           type: string
+ *           description: The name of the movie.
+ *         duration:
+ *           type: string
+ *           description: Duration of the movie in HH:mm:ss format or its release date.
+ *         playingdates:
+ *           type: array
+ *           items:
+ *             type: string
+ *             format: date-time
+ *           description: List of dates when the movie is playing.
+ *         genre:
+ *           type: string
+ *           description: Genre of the movie.
+ *         summary:
+ *           type: string
+ *           description: A brief summary of the movie plot.
+ *     MovieCreateRequest:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *           description: The name of the movie.
+ *         duration:
+ *           type: string
+ *           format: date-time
+ *           description: Duration or release date of the movie.
+ *         playingdates:
+ *           type: array
+ *           items:
+ *             type: string
+ *             format: date-time
+ *           description: List of dates when the movie is playing.
+ *         genre:
+ *           type: string
+ *           description: Genre of the movie.
+ *         summary:
+ *           type: string
+ *           description: A brief summary of the movie plot.
+ *       required:
+ *         - name
+ *         - duration
+ *         - playingdates
+ *         - genre
+ *         - summary
  */
 
 import express, { NextFunction, Request, Response } from 'express';
@@ -53,7 +80,7 @@ const movieRouter = express.Router();
  *             schema:
  *               type: array
  *               items:
- *                  $ref: '#/components/schemas/Movie'
+ *                 $ref: '#/components/schemas/Movie'
  */
 movieRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -67,24 +94,24 @@ movieRouter.get('/', async (req: Request, res: Response, next: NextFunction) => 
 /**
  * @swagger
  * /movies/{id}:
- *  get:
- *      summary: Get a movie by its ID.
- *      parameters:
- *          - in: path
- *            name: id
- *            schema:
- *              type: integer
- *              required: true
- *              description: The movie ID.
- *      responses:
- *          200:
- *              description: A movie object.
- *              content:
- *                  application/json:
- *                      schema:
- *                          $ref: '#/components/schemas/Movie'
- *          404:
- *              description: Movie not found.
+ *   get:
+ *     summary: Get a movie by its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *           required: true
+ *           description: The movie ID.
+ *     responses:
+ *       200:
+ *         description: A movie object.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Movie'
+ *       404:
+ *         description: Movie not found.
  */
 movieRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -101,41 +128,28 @@ movieRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) 
 
 /**
  * @swagger
- * components:
- *   securitySchemes:
- *     bearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
- *   schemas:
- *     Movie:
- *       type: object
- *       properties:
- *         id:
- *           type: number
- *           format: int64
- *           description: Unique identifier for the movie.
- *         name:
- *           type: string
- *           description: The name of the movie.
- *         duration:
- *           type: string
- *           format: date-time
- *           description: The duration or release date of the movie.
- *         playingdates:
- *           type: array
- *           items:
- *             type: string
- *             format: date-time
- *           description: List of dates when the movie is playing.
- *         genre:
- *           type: string
- *           description: Genre of the movie.
- *         summary:
- *           type: string
- *           description: A brief summary of the movie plot.
+ * /movies:
+ *   post:
+ *     summary: Add a new movie.
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       description: The details of the movie to create.
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/MovieCreateRequest'
+ *     responses:
+ *       201:
+ *         description: Movie successfully created.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Movie'
+ *       400:
+ *         description: Bad request. Invalid input data.
  */
-
 movieRouter.post('/', async (req, res, next) => {
     try {
       const movieName = req.body.name;

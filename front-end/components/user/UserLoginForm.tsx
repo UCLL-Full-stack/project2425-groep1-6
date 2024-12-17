@@ -3,6 +3,7 @@ import { StatusMessage } from "../../types";
 import { useState } from "react";
 import UserService from "@/services/userService";
 import classNames from "classnames";
+import { useTranslation } from 'next-i18next';
 
 const UserLoginForm: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -11,6 +12,7 @@ const UserLoginForm: React.FC = () => {
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [statusMessages, setStatusMessages] = useState<StatusMessage[]>([]);
   const router = useRouter();
+  const { t } = useTranslation();
 
   const clearErrors = () => {
     setNameError(null);
@@ -22,12 +24,12 @@ const UserLoginForm: React.FC = () => {
     let result = true;
 
     if (!name && name.trim() === "") {
-      setNameError("Name is required");
+      setNameError(t("login.validate.name"));
       result = false;
     }
 
     if (!password && password.trim() === "") {
-      setPasswordError("Password is required");
+      setPasswordError(t("login.validate.password")); 
       result = false;
     }
 
@@ -74,7 +76,7 @@ const UserLoginForm: React.FC = () => {
       } else {
         setStatusMessages([
           {
-            message: "An error has occurred. Please try again later.",
+            message: t("general.error"),
             type: "error",
           },
         ]);
@@ -82,7 +84,7 @@ const UserLoginForm: React.FC = () => {
     } catch (error) {
       setStatusMessages([
         {
-          message: "An error has occurred. Please try again later.",
+          message: t("general.error"),
           type: "error",
         },
       ]);
@@ -91,7 +93,7 @@ const UserLoginForm: React.FC = () => {
 
   return (
     <>
-      <h3 className="px-0">Login</h3>
+      <h3 className="px-0">{t("login.title")}</h3>
       {statusMessages && (
         <div className="row">
           <ul className="list-none mb-3 mx-auto ">
@@ -111,7 +113,7 @@ const UserLoginForm: React.FC = () => {
       )}
       <form onSubmit={handleSubmit}>
         <label htmlFor="nameInput" className="block mb-2 text-sm font-medium">
-          Username:
+        {t("login.label.username")} 
         </label>
         <div className="block mb-2 text-sm font-medium">
           <input
@@ -129,7 +131,7 @@ const UserLoginForm: React.FC = () => {
               htmlFor="passwordInput"
               className="block mb-2 text-sm font-medium"
             >
-              Password:
+              {t("login.label.password")} 
             </label>
           </div>
           <div className="block mb-2 text-sm font-medium">
@@ -149,7 +151,7 @@ const UserLoginForm: React.FC = () => {
           className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
           type="submit"
         >
-          Login
+          {t("login.button")}
         </button>
       </form>
     </>
