@@ -11,17 +11,17 @@ model Movie {
   id           Int      @id @default(autoincrement())
   name         String
   duration     DateTime
-  playingdates DateTime[] // Represents an array of dates
+  playingdates DateTime[]
   genre        String
   summary      String
-  tickets      Ticket[]  @relation("MovieTickets")
+  tickets      Ticket[] @relation("MovieTickets")
 }
 
 model Room {
   id        Int     @id @default(autoincrement())
   name      String
-  chairs    Int[]   // Represents an array of chair numbers as integers
-  tasks     Task[]  @relation("RoomTasks")
+  chairs    Int[]
+  tasks     Task[] @relation("RoomTasks")
 }
 
 model Task {
@@ -31,8 +31,14 @@ model Task {
   description String
   status      String
   comment     String
+
+  // Relatie met Room
   roomId      Int
   room        Room     @relation("RoomTasks", fields: [roomId], references: [id])
+
+  // Optionele relatie met User
+  userId      Int?     // Nullable foreign key
+  user        User?    @relation("UserTasks", fields: [userId], references: [id])
 }
 
 model Ticket {
@@ -46,10 +52,12 @@ model Ticket {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
+  id       Int      @id @default(autoincrement())
+  username String   @unique
   password String
-  email    String @unique
+  email    String   @unique
   role     String
 
+  // Relatie met Task
+  tasks    Task[]   @relation("UserTasks")
 }

@@ -11,6 +11,8 @@ const AddTaskForm: React.FC = () => {
     comment: "",
   });
 
+  console.log("####### In Add Task form");
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {

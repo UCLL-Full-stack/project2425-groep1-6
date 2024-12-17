@@ -1,4 +1,4 @@
-import {Task as TaskPrisma} from "@prisma/client"; 
+import { Task as TaskPrisma, User as UserPrisma } from "@prisma/client";
 
 export class Task {
     private id?: number;
@@ -7,6 +7,8 @@ export class Task {
     private description: string;
     private status: string;
     private comment: string;
+    private userId?: number | null; // Nullable foreign key
+    private user?: UserPrisma;      // Optionele relatie naar User
 
     constructor(task: {
         id?: number;
@@ -15,6 +17,8 @@ export class Task {
         description: string;
         status: string;
         comment: string;
+        userId?: number | null;
+        user?: UserPrisma;
     }) {
         this.id = task.id;
         this.date = task.date;
@@ -22,13 +26,15 @@ export class Task {
         this.description = task.description;
         this.status = task.status;
         this.comment = task.comment;
+        this.userId = task.userId;
+        this.user = task.user;
     }
 
     getId(): number | undefined {
         return this.id;
     }
 
-    getDate(): Date{
+    getDate(): Date {
         return this.date;
     }
 
@@ -48,6 +54,14 @@ export class Task {
         return this.comment;
     }
 
+    getUserId(): number | null | undefined {
+        return this.userId;
+    }
+
+    getUser(): UserPrisma | undefined {
+        return this.user;
+    }
+
     static from({
         id,
         date,
@@ -55,15 +69,18 @@ export class Task {
         description,
         status,
         comment,
-    }: TaskPrisma) {
-        return new Task ({
+        userId,
+        user,
+    }: TaskPrisma & { user?: UserPrisma }) {
+        return new Task({
             id,
             date,
             time,
             description,
             status,
             comment,
-        })
+            userId,
+            user,
+        });
     }
-
 }
