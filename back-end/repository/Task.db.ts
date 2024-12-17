@@ -34,6 +34,7 @@ const addTask = async (
     roomId: number
 ): Promise<Task> => {
     try {
+        roomId = 1; //Testing
         const roomExists = await database.room.findUnique({ where: { id: roomId } });
         if (!roomExists) {
             throw new Error('Room with the specified ID does not exist.');

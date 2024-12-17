@@ -100,7 +100,11 @@ taskRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
  *       400:
  *         description: Invalid input.
  */
-taskRouter.post('/add', async (req: Request, res: Response, next: NextFunction) => {
+taskRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
+
+    console.log("##########Inkomende JSON van de frontend:");
+    console.log(JSON.stringify(req.body, null, 2)); // Mooi geformatteerde JSON
+
     try {
         const { date, time, description, status, comment, roomId } = req.body;
         const newTask = await taskService.addTask(
@@ -111,6 +115,10 @@ taskRouter.post('/add', async (req: Request, res: Response, next: NextFunction) 
             comment,
             roomId
         );
+
+        console.log("JSON terug naar de frontend:");
+        console.log(JSON.stringify(newTask, null, 2)); // Mooi geformatteerd
+
         res.status(200).json(newTask);
     } catch (error) {
         next(error);
