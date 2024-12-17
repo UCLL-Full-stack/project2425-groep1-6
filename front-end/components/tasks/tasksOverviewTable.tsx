@@ -38,27 +38,45 @@ const TasksOverviewTable: React.FC = () => {
   }
 
   return (
-    <table>
-      <thead>
+    <table className="min-w-full divide-y divide-gray-200">
+      <thead className="bg-gray-50">
         <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Comment</th>
-          <th>Assign</th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Date
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Time
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Description
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Status
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Comment
+          </th>
+          <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Assign
+          </th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="bg-white divide-y divide-gray-200">
         {tasks.map((task) => (
           <tr key={task.id}>
-            <td>{new Date(task.date).toDateString()}</td>
-            <td>{new Date(task.time).toLocaleTimeString()}</td>
-            <td>{task.description}</td>
-            <td>{task.status}</td>
-            <td>{task.comment}</td>
-            <td>
-              <button>Assign</button>
+            <td className="px-6 py-4 whitespace-nowrap">
+              {new Date(task.date).toDateString()}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              {new Date(task.time).toLocaleTimeString()}
+            </td>
+            <td className="px-6 py-4 whitespace-nowrap">{task.description}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{task.status}</td>
+            <td className="px-6 py-4 whitespace-nowrap">{task.comment}</td>
+            <td className="px-6 py-4 whitespace-nowrap">
+              <button className="px-4 py-2 bg-green-500 text-white rounded">
+                Assign
+              </button>
             </td>
           </tr>
         ))}
