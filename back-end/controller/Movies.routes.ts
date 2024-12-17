@@ -72,6 +72,8 @@ const movieRouter = express.Router();
  * /movies:
  *   get:
  *     summary: Get a list of all movies.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of movies.
@@ -117,7 +119,7 @@ movieRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) 
     try {
         const movie = await movieService.getMovieById(Number(req.params.id));
         if (!movie) {
-            res.status(404).json({ message: "Movie not found" });
+            res.status(404).json({ message: 'Movie not found' });
             return;
         }
         res.status(200).json(movie);
@@ -152,16 +154,22 @@ movieRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) 
  */
 movieRouter.post('/', async (req, res, next) => {
     try {
-      const movieName = req.body.name;
-      const movieDuration = req.body.duration;
-      const moviePlayingdates = req.body.playingdates;
-      const movieGenre = req.body.genre;
-      const movieSummary = req.body.summary;
-      const newMovie = await movieService.addMovie(movieName,movieDuration, moviePlayingdates, movieGenre, movieSummary); 
-      res.status(201).json(newMovie);
+        const movieName = req.body.name;
+        const movieDuration = req.body.duration;
+        const moviePlayingdates = req.body.playingdates;
+        const movieGenre = req.body.genre;
+        const movieSummary = req.body.summary;
+        const newMovie = await movieService.addMovie(
+            movieName,
+            movieDuration,
+            moviePlayingdates,
+            movieGenre,
+            movieSummary
+        );
+        res.status(201).json(newMovie);
     } catch (error) {
-      next(error);
+        next(error);
     }
-  });
+});
 
 export { movieRouter };

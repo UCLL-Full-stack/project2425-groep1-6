@@ -34,10 +34,12 @@ const addTask = async (
     roomId: number
 ): Promise<Task> => {
     try {
+        roomId = 1; // hardcoded for now
+        /*
         const roomExists = await database.room.findUnique({ where: { id: roomId } });
         if (!roomExists) {
             throw new Error('Room with the specified ID does not exist.');
-        }
+        }*/
 
         const taskPrisma = await database.task.create({
             data: {
@@ -47,8 +49,7 @@ const addTask = async (
                 status,
                 comment,
                 roomId,
-            }
-
+            },
         });
         return Task.from(taskPrisma);
     } catch (error) {

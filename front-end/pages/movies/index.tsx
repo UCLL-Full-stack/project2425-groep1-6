@@ -12,31 +12,32 @@ const Movies: React.FC = () => {
   const [movies, setMovies] = useState<Array<Movie>>([]);
   const { t } = useTranslation();
 
-
   const addMovie = async () => {
     const newMovie = {
       name: "New Movie",
-      duration: new Date(0,0,0,3,30,0),
-      playingdates: [new Date('2024-06-27'), new Date('2024-08-01')],
+      duration: new Date(0, 0, 0, 3, 30, 0),
+      playingdates: [new Date("2024-06-27"), new Date("2024-08-01")],
       genre: "action",
-      summary: "A brand new movie."
+      summary: "A brand new movie.",
     };
     const response = await MovieService.addMovie(newMovie);
     if (response.ok) {
-      getMovies(); 
+      getMovies();
     } else {
       console.error("Failed to add movie");
     }
   };
 
-
   const getMovies = async () => {
-    const response = await MovieService.getAllMovies();
+    const token = sessionStorage.getItem("loggedInUserToken");
+    const response = await MovieService.getAllMovies(token);
     const json = await response.json();
     setMovies(json);
   };
 
-  useEffect(() => {getMovies();}, []);
+  useEffect(() => {
+    getMovies();
+  }, []);
 
   return (
     <>

@@ -1,4 +1,4 @@
-type Role = "admin" | "user" | "guest" | "worker";
+export type Role = "admin" | "user" | "guest" | "worker";
 
 export type Movie = {
   id?: number;

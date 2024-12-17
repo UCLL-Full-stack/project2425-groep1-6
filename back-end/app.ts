@@ -8,6 +8,9 @@ import { movieRouter } from './controller/Movies.routes';
 import { expressjwt } from 'express-jwt';
 import { userRouter } from './controller/User.routes';
 import helmet from 'helmet';
+import { taskRouter } from './controller/Task.routes';
+import { ticketRouter } from './controller/Ticket.routes';
+import { roomRouter } from './controller/Room.routes';
 
 const app = express();
 app.use(helmet());
@@ -28,6 +31,9 @@ app.use(
 
 app.use('/movies', movieRouter);
 app.use('/users', userRouter);
+app.use('/tasks', taskRouter);
+app.use('/rooms', roomRouter);
+app.use('/tickets', ticketRouter);
 
 app.get('/status', (req, res) => {
     res.json({ message: 'Back-end is running...' });

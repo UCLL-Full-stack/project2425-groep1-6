@@ -53,6 +53,7 @@ const UserLoginForm: React.FC = () => {
 
       if (response.status === 200) {
         const user = await response.json();
+        sessionStorage.setItem("loggedInUserToken", user.token); // Ensure the token is stored in session storage
         localStorage.setItem(
           "loggedInUser",
           JSON.stringify({

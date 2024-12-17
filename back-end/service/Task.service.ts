@@ -13,7 +13,19 @@ const getTaskById = async (id: number): Promise<Task> => {
     return task;
 };
 
+const addTask = async (
+    date: Date,
+    time: Date,
+    description: string,
+    status: string,
+    comment: string,
+    roomId: number
+): Promise<Task> => {
+    return taskDb.addTask(date, time, description, status, comment, roomId);
+};
+
 export default {
     getAllTasks,
     getTaskById,
+    addTask,
 };
