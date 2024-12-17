@@ -100,7 +100,7 @@ taskRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
  *       400:
  *         description: Invalid input.
  */
-taskRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
+taskRouter.post('/add', async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { date, time, description, status, comment, roomId } = req.body;
         const newTask = await taskService.addTask(
