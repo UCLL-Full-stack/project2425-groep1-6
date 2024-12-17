@@ -23,6 +23,7 @@ const Header: React.FC = () => {
   const handleLogout = () => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("loggedInUser");
+      sessionStorage.removeItem("token"); // Remove token from session storage
     }
     setIsLoggedIn(false);
     router.push("/");
