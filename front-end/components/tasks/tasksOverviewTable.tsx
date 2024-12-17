@@ -46,6 +46,7 @@ const TasksOverviewTable: React.FC = () => {
           <th>Description</th>
           <th>Status</th>
           <th>Comment</th>
+          <th>Assign</th>
         </tr>
       </thead>
       <tbody>
@@ -56,6 +57,9 @@ const TasksOverviewTable: React.FC = () => {
             <td>{task.description}</td>
             <td>{task.status}</td>
             <td>{task.comment}</td>
+            <td>
+              <button>Assign</button>
+            </td>
           </tr>
         ))}
       </tbody>
