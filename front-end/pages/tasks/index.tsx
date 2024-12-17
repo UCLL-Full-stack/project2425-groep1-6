@@ -6,16 +6,25 @@ import TaskService from "@/services/taskService";
 import TasksOverviewTable from "@/components/tasks/tasksOverviewTable";
 import AddTaskForm from "@/components/tasks/addTaskForm";
 import UserService from "@/services/userService";
+import { jwtDecode } from "jwt-decode";
 
 const Tasks: React.FC = () => {
-  const [user, setUser] = useState<User | null>(null);
+  //const [user, setUser] = useState<User | null>(null);
+  const [role, setRole] = useState<String | null>(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       const token = sessionStorage.getItem("loggedInUserToken");
       if (token) {
-        const userData = await UserService.getUserById(token);
-        setUser(userData);
+        try {
+          // Decode het token om het userId te extraheren
+          const decodedToken: any = jwtDecode(token);
+          const role = decodedToken.role;
+  
+          setRole(role);
+        } catch (error) {
+          console.error("Error fetching user:", error);
+        }
       }
     };
     fetchUser();
@@ -33,7 +42,7 @@ const Tasks: React.FC = () => {
           <h2>Tasks Overview</h2>
           <TasksOverviewTable />
         </section>
-        {user && <AddTaskForm user={user} />}
+        {role === "admin" && <AddTaskForm/>}
       </main>
     </>
   );

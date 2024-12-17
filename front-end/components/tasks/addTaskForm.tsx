@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import { Task, User } from "../../types";
 import TaskService from "../../services/taskService";
 
-interface AddTaskFormProps {
-  user: User;
-}
 
-const AddTaskForm: React.FC<AddTaskFormProps> = ({ user }) => {
+const AddTaskForm: React.FC = () => {
   const [task, setTask] = useState<Omit<Task, "id">>({
     date: new Date(),
     time: new Date(),
@@ -14,6 +11,8 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ user }) => {
     status: "",
     comment: "",
   });
+
+  console.log("####### In Add Task form");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,9 +36,6 @@ const AddTaskForm: React.FC<AddTaskFormProps> = ({ user }) => {
     }
   };
 
-  if (user.role !== "admin") {
-    return null;
-  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
