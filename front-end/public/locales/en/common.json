@@ -16,29 +16,30 @@
         "button": "Login",
         "success": "Login succesful. Redirecting to homepage...",
         "validate": {
-        "name": "Name is required",
-        "password": "Password is required"
+            "name": "Name is required",
+            "password": "Password is required"
         },
         "label": { "username": "Username:", "password": "Password:" }
     },
-    "lecturers":{
-        "title": "Lecturers",
-        "selectedLecturer.text": "Courses taught by",
+    "movies":{
+        "title": "Movies",
+        "overviewtitle": "Movies Overview",
+        "addmovietitle": "Add a Movie",
         "unauthorized": "You are not authorized to view this page",
         "overview":{
-            "firstname": "Firstname",
-            "lastname": "Lastname",
-            "e-mail": "E-mail",
-            "expertise": "Expertise"
+            "title": "Title",
+            "genre": "Genre",
+            "duration": "Duration",
+            "nomovies": "No movies available."
         },
-        "courses":{
-            "overview":{
-                "name": "Name",
-                "description": "Description",
-                "phase": "Phase",
-                "credits": "Credits",
-                "button": "Schedule"
-            }
+        "form":{
+            "name": "Name:",
+            "duration": "Duration:",
+            "playingdates": "Playing Dates:",
+            "genre": "Genre:",
+            "summary": "Summary:",
+            "button": "Add Movie"
+
         }
     }
 

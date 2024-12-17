@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import MovieService from '@/services/movieService';
 import { Movie } from '@/types';
+import { useTranslation } from "react-i18next";
 
 const MovieForm: React.FC = () => {
   const [name, setName] = useState<string>('');
@@ -9,6 +10,7 @@ const MovieForm: React.FC = () => {
   const [genre, setGenre] = useState<string>('');
   const [summary, setSummary] = useState<string>('');
   const [error, setError] = useState<string>('');
+  const { t } = useTranslation();
 
   const handleAddMovie = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -47,10 +49,10 @@ const MovieForm: React.FC = () => {
 
   return (
     <form onSubmit={handleAddMovie}>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div className='p-1'>
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      <div className="p-1">
         <label>
-          Name:
+          {t("movies.form.name")}
           <input
             type="text"
             value={name}
@@ -59,9 +61,9 @@ const MovieForm: React.FC = () => {
           />
         </label>
       </div>
-      <div className='p-1'>
+      <div className="p-1">
         <label>
-          Duration:
+          {t("movies.form.duration")}
           <input
             type="time"
             value={duration.getTime()}
@@ -70,23 +72,20 @@ const MovieForm: React.FC = () => {
           />
         </label>
       </div>
-      <div className='p-1'>
+      <div className="p-1">
         <label>
-          Playing Dates:
-          <input
-            type="date"
-            onChange={handleAddPlayingDate}
-          />
+          {t("movies.form.playingdates")}
+          <input type="date" onChange={handleAddPlayingDate} />
           <ul>
             {playingdates.map((date, index) => (
               <li key={index}>{date.toISOString().substring(0, 10)}</li>
             ))}
           </ul>
         </label>
-      </div >
-      <div className='p-1'>
+      </div>
+      <div className="p-1">
         <label>
-          Genre:
+          {t("movies.form.genre")}
           <input
             type="text"
             value={genre}
@@ -95,9 +94,9 @@ const MovieForm: React.FC = () => {
           />
         </label>
       </div>
-      <div className='p-1'>
+      <div className="p-1">
         <label>
-          Summary:
+          {t("movies.form.summary")}
           <textarea
             value={summary}
             onChange={(e) => setSummary(e.target.value)}
@@ -105,7 +104,7 @@ const MovieForm: React.FC = () => {
           />
         </label>
       </div>
-      <button type="submit">Add Movie</button>
+      <button type="submit">{t("movies.form.button")}</button>
     </form>
   );
 };

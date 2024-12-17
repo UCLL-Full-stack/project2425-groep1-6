@@ -5,9 +5,12 @@ import { Movie } from "@/types";
 import MovieService from "@/services/movieService";
 import MovieOverviewTable from "@/components/movies/movieOverviewTable";
 import MovieForm from "@/components/movies/movieForm";
+import { useTranslation } from "react-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Movies: React.FC = () => {
   const [movies, setMovies] = useState<Array<Movie>>([]);
+  const { t } = useTranslation();
 
 
   const addMovie = async () => {
@@ -38,22 +41,32 @@ const Movies: React.FC = () => {
   return (
     <>
       <Head>
-        <title>Movies</title>
+        <title>{t("movies.title")}</title>
       </Head>
       <Header />
       <main className="d-flex flex-column justify-content-center align-items-center">
-        <h1>Movies</h1>
+        <h1>{t("movies.title")}</h1>
         <section>
-          <h2>Movies Overview</h2>
+          <h2>{t("movies.overviewtitle")}</h2>
           <MovieOverviewTable movies={movies} />
         </section>
         <section>
-          <h2>Add a Movie</h2>
-          <MovieForm/>
+          <h2>{t("movies.addmovietitle")}</h2>
+          <MovieForm />
         </section>
       </main>
     </>
   );
+};
+
+export const getServerSideProps = async (context) => {
+  const { locale } = context;
+
+  return {
+    props: {
+      ...(await serverSideTranslations(locale ?? "en", ["common"])),
+    },
+  };
 };
 
 export default Movies;

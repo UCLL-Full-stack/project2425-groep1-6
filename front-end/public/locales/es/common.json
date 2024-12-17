@@ -1,43 +1,44 @@
 {
     "app.title": "Bio-Scope",
-    "general.error": "Se ha producido un error. Vuelva a intentarlo más tarde.",
+    "general.error": "Ha ocurrido un error. Por favor, inténtalo de nuevo más tarde.",
     "header": {
         "welcome": "Bienvenido",
         "nav": {
             "home": "Inicio",
-            "movies": "cine",
-            "login": "Conéctese",
+            "movies": "Películas",
+            "login": "Iniciar sesión",
             "logout": "Cerrar sesión"
         }
     },
+
     "login": {
-        "title": "Inicio de sesión",
-        "button": "Conéctese",
-        "success": "Inicio de sesión exitoso. Redirigiendo a la página de inicio...",
-        "validate": {"name": "Nombre obligatorio",
-        "password": "Se requiere contraseña"
+        "title": "Iniciar sesión",
+        "button": "Iniciar sesión",
+        "success": "Inicio de sesión exitoso. Redirigiendo a la página principal...",
+        "validate": {
+            "name": "El nombre es obligatorio",
+            "password": "La contraseña es obligatoria"
         },
         "label": { "username": "Nombre de usuario:", "password": "Contraseña:" }
     },
-    "lecturers": {
-        "title": "Profesores",
-        "selectedLecturer.text": "Cursos impartidos por",
+    "movies": {
+        "title": "Películas",
+        "overviewtitle": "Resumen de películas",
+        "addmovietitle": "Agregar una película",
         "unauthorized": "No estás autorizado para ver esta página",
         "overview": {
-            "firstname": "Nombre",
-            "lastname": "Apellido",
-            "e-mail": "Correo electrónico",
-            "expertise": "Especialización"
+            "title": "Título",
+            "genre": "Género",
+            "duration": "Duración",
+            "nomovies": "No hay películas disponibles."
         },
-        "courses": {
-            "overview": {
-                "name": "Nombre",
-                "description": "Descripción",
-                "phase": "Fase",
-                "credits": "Créditos",
-                "button": "Horario"
-            }
+        "form": {
+            "name": "Nombre:",
+            "duration": "Duración:",
+            "playingdates": "Fechas de reproducción:",
+            "genre": "Género:",
+            "summary": "Resumen:",
+            "button": "Agregar película"
         }
     }
-
 }

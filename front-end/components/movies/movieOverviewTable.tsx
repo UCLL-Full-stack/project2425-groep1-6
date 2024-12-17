@@ -1,22 +1,25 @@
 import React from "react";
 import { Movie } from "@/types";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   movies: Array<Movie> | null | undefined; // Toegestane types voor robustness
 };
 
 const MovieOverviewTable: React.FC<Props> = ({ movies }: Props) => {
+  const { t } = useTranslation();
+
   if (!Array.isArray(movies) || movies.length === 0) {
-    return <p>No movies available.</p>; // Fallback voor geen data
+    return <p>{t("movies.overview.nomovies")}</p>; // Fallback voor geen data
   }
 
   return (
     <table className="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Genre</th>
-          <th scope="col">Duration</th>
+          <th scope="col">{t("movies.overview.title")}</th>
+          <th scope="col">{t("movies.overview.genre")}</th>
+          <th scope="col">{t("movies.overview.duration")}</th>
         </tr>
       </thead>
       <tbody>
