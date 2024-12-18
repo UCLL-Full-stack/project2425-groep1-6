@@ -101,8 +101,7 @@ taskRouter.get('/', async (req: Request, res: Response, next: NextFunction) => {
  *         description: Invalid input.
  */
 taskRouter.post('/', async (req: Request, res: Response, next: NextFunction) => {
-
-    console.log("##########Inkomende JSON van de frontend:");
+    console.log('##########Inkomende JSON van de frontend:');
     console.log(JSON.stringify(req.body, null, 2)); // Mooi geformatteerde JSON
 
     try {
@@ -116,7 +115,7 @@ taskRouter.post('/', async (req: Request, res: Response, next: NextFunction) => 
             roomId
         );
 
-        console.log("JSON terug naar de frontend:");
+        console.log('JSON terug naar de frontend:');
         console.log(JSON.stringify(newTask, null, 2)); // Mooi geformatteerd
 
         res.status(200).json(newTask);
@@ -156,6 +155,54 @@ taskRouter.get('/:id', async (req: Request, res: Response, next: NextFunction) =
             res.status(404).json({ message: 'Task not found' });
             return;
         }
+        res.status(200).json(task);
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * @swagger
+ * /tasks/{id}/assign:
+ *   post:
+ *     summary: Assign a task to a user.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the task to assign.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: integer
+ *                 description: The ID of the user to assign the task to.
+ *     responses:
+ *       200:
+ *         description: The task was successfully assigned.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Task'
+ *       400:
+ *         description: Invalid input.
+ *       404:
+ *         description: Task not found.
+ *       500:
+ *         description: Internal server error.
+ */
+taskRouter.post('/:id/assign', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { userId } = req.body;
+        const task = await taskService.assignTaskToUser(Number(req.params.id), userId);
         res.status(200).json(task);
     } catch (error) {
         next(error);

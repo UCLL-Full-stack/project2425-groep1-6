@@ -57,8 +57,22 @@ const addTask = async (
     }
 };
 
+const assignTaskToUser = async (taskId: number, userId: number): Promise<Task> => {
+    try {
+        const taskPrisma = await database.task.update({
+            where: { id: taskId },
+            data: { userId },
+        });
+        return Task.from(taskPrisma);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
 export default {
     getAllTasks,
     getTaskById,
     addTask,
+    assignTaskToUser,
 };
