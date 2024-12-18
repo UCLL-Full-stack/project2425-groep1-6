@@ -70,9 +70,22 @@ const assignTaskToUser = async (taskId: number, userId: number): Promise<Task> =
     }
 };
 
+const getTasksByUserId = async (userId: number): Promise<Task[]> => {
+    try {
+        const tasksPrisma = await database.task.findMany({
+            where: { userId },
+        });
+        return tasksPrisma.map(Task.from);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
 export default {
     getAllTasks,
     getTaskById,
     addTask,
     assignTaskToUser,
+    getTasksByUserId,
 };

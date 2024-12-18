@@ -209,4 +209,41 @@ taskRouter.post('/:id/assign', async (req: Request, res: Response, next: NextFun
     }
 });
 
+/**
+ * @swagger
+ * /tasks/user/{userId}:
+ *   get:
+ *     summary: Get tasks assigned to a specific user.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the user.
+ *     responses:
+ *       200:
+ *         description: A list of tasks assigned to the user.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                  $ref: '#/components/schemas/Task'
+ *       404:
+ *         description: User not found.
+ *       500:
+ *         description: Internal server error.
+ */
+taskRouter.get('/user/:userId', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const tasks = await taskService.getTasksByUserId(Number(req.params.userId));
+        res.status(200).json(tasks);
+    } catch (error) {
+        next(error);
+    }
+});
+
 export { taskRouter };

@@ -28,9 +28,14 @@ const assignTaskToUser = async (taskId: number, userId: number): Promise<Task> =
     return taskDb.assignTaskToUser(taskId, userId);
 };
 
+const getTasksByUserId = async (userId: number): Promise<Task[]> => {
+    return taskDb.getTasksByUserId(userId);
+};
+
 export default {
     getAllTasks,
     getTaskById,
     addTask,
     assignTaskToUser,
+    getTasksByUserId,
 };
