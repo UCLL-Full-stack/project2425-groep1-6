@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { config } from 'dotenv';
 import path from 'path';
+import bcrypt from 'bcrypt';
 
 // Load environment variables
 config({ path: path.resolve(__dirname, '../../.env') });
@@ -179,32 +180,40 @@ async function main() {
     const users = await Promise.all([
         prisma.user.create({
             data: {
-                username: 'admin1',
-                password: 'password123',
+                username: 'admin',
+                password: await bcrypt.hash('password123', 12),
                 email: 'admin1@example.com',
                 role: 'admin',
             },
         }),
         prisma.user.create({
             data: {
-                username: 'guest1',
-                password: 'password123',
+                username: 'guest',
+                password: await bcrypt.hash('password123', 12),
                 email: 'guest1@example.com',
                 role: 'guest',
             },
         }),
         prisma.user.create({
             data: {
-                username: 'worker1',
-                password: 'password123',
+                username: 'worker',
+                password: await bcrypt.hash('password123', 12),
                 email: 'worker1@example.com',
                 role: 'worker',
             },
         }),
         prisma.user.create({
             data: {
+                username: 'user',
+                password: await bcrypt.hash('password123', 12),
+                email: 'user@example.com',
+                role: 'user',
+            },
+        }),
+        prisma.user.create({
+            data: {
                 username: 'admin2',
-                password: 'password123',
+                password: await bcrypt.hash('password123', 12),
                 email: 'admin2@example.com',
                 role: 'admin',
             },
@@ -212,7 +221,7 @@ async function main() {
         prisma.user.create({
             data: {
                 username: 'guest2',
-                password: 'password123',
+                password: await bcrypt.hash('password123', 12),
                 email: 'guest2@example.com',
                 role: 'guest',
             },
