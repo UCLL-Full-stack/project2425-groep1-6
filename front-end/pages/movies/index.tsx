@@ -5,7 +5,7 @@ import { Movie } from "@/types";
 import MovieService from "@/services/movieService";
 import MovieOverviewTable from "@/components/movies/movieOverviewTable";
 import MovieForm from "@/components/movies/movieForm";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const Movies: React.FC = () => {

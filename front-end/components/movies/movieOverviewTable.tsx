@@ -1,6 +1,6 @@
 import React from "react";
 import { Movie } from "@/types";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 type Props = {
   movies: Array<Movie> | null | undefined; // Toegestane types voor robustness

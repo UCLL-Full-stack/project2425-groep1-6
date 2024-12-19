@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import MovieService from '@/services/movieService';
 import { Movie } from '@/types';
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 const MovieForm: React.FC = () => {
   const [name, setName] = useState<string>('');
