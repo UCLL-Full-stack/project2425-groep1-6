@@ -24,7 +24,12 @@
             "name": "Name is required",
             "password": "Password is required"
         },
-        "label": { "username": "Username:", "password": "Password:" }
+        "label": { "username": "Username:", "password": "Password:" },
+        "overview":{
+            "username": "Username",
+            "password": "Password",
+            "role": "Role"
+        }
     },
     "movies":{
         "title": "Movies",

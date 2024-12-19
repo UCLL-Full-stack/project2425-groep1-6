@@ -24,7 +24,12 @@
             "name": "El nombre es obligatorio",
             "password": "La contraseña es obligatoria"
         },
-        "label": { "username": "Nombre de usuario:", "password": "Contraseña:" }
+        "label": { "username": "Nombre de usuario:", "password": "Contraseña:" },
+        "overview":{
+            "username": "Nombre de usuario",
+            "password": "Contraseña",
+            "role": "Role"
+        }
     },
     "movies": {
         "title": "Películas",

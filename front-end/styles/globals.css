@@ -52,7 +52,7 @@ p,
 ul {
   margin: 0;
 }
-p, label {
+p, label, td, th {
   color: #c499ff;
 }
 input, textarea {

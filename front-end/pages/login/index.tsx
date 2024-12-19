@@ -3,9 +3,14 @@ import Header from "@/components/header";
 import UserLoginForm from "@/components/user/UserLoginForm";
 import Head from "next/head";
 import { useTranslation } from 'next-i18next';
+import UsersOverview from "@/components/UsersOverview";
+import { useEffect, useState } from "react";
+import { User } from "@/types";
+import UserService from "@/services/userService";
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
+
   return (
     <>
       <Head>
@@ -15,6 +20,7 @@ const Login: React.FC = () => {
       <Header />
       <main>
         <UserLoginForm />
+        <UsersOverview/>
       </main>
     </>
   );
