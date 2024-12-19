@@ -1,3 +1,4 @@
+import { Ticket } from "@/types";
 
 const getAllTickets = async () => {
     return await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tickets`, {
@@ -13,12 +14,21 @@ const getAllTickets = async () => {
     });
   };
  
-  
+  const addTicket = async (ticket: Ticket) => {
+    return fetch(process.env.NEXT_PUBLIC_API_URL + "/ticket/addticket", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(ticket),
+    });
+  }
 
   
   const TicketService = {
     getAllTickets,
-    getTicketById
+    getTicketById,
+    addTicket
   };
   
   export default TicketService;

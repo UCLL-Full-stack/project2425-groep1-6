@@ -129,4 +129,50 @@ ticketRouter.get('/:id', async (req: Request, res: Response, next: NextFunction)
     }
 });
 
+/**
+ * @swagger
+ * /ticket/addticket:
+ *   post:
+ *     summary: Create a new ticket.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/TicketCreateRequest'
+ *     responses:
+ *       201:
+ *         description: Ticket created successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Ticket'
+ *       400:
+ *         description: Invalid input.
+ */
+ticketRouter.post('/addticket', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { price, date, time, chair, movieId } = req.body;
+  
+      // Validate required fields
+      if (!price || !date || !time || !chair || !movieId) {
+        return res.status(400).json({ message: 'Missing required fields' });
+      }
+  
+      const newTicket = await ticketService.addTicket({
+        price,
+        date,
+        time,
+        chair,
+        movieId,
+      });
+  
+      res.status(201).json(newTicket);
+    } catch (error) {
+      next(error);
+    }
+  });
+  
+
+
 export { ticketRouter };
