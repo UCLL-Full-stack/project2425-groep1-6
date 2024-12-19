@@ -246,4 +246,84 @@ taskRouter.get('/user/:userId', async (req: Request, res: Response, next: NextFu
     }
 });
 
+/**
+ * @swagger
+ * /tasks/{id}/status:
+ *   put:
+ *     summary: Update the status of a task.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the task to update.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               status:
+ *                 type: string
+ *                 description: The new status of the task.
+ *     responses:
+ *       200:
+ *         description: The task status was successfully updated.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Task'
+ *       400:
+ *         description: Invalid input.
+ *       404:
+ *         description: Task not found.
+ *       500:
+ *         description: Internal server error.
+ */
+taskRouter.put('/:id/status', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { status } = req.body;
+        const taskId = Number(req.params.id);
+        const task = await taskService.updateTaskStatus(taskId, status);
+        res.status(200).json(task);
+    } catch (error) {
+        next(error);
+    }
+});
+
+/**
+ * @swagger
+ * /tasks/{id}:
+ *   delete:
+ *     summary: Delete a task by its ID.
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the task to delete.
+ *     responses:
+ *       200:
+ *         description: Task deleted successfully.
+ *       404:
+ *         description: Task not found.
+ *       500:
+ *         description: Internal server error.
+ */
+taskRouter.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        await taskService.deleteTask(Number(req.params.id));
+        res.status(200).json({ message: 'Task deleted successfully' });
+    } catch (error) {
+        next(error);
+    }
+});
+
 export { taskRouter };

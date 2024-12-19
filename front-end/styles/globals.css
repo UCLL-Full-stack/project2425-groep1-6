@@ -7,8 +7,9 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    Oxygen, Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   background: linear-gradient(135deg, #491d8f, #5541c8);
   color: #ffffff;
   overflow-x: hidden;
@@ -52,10 +53,12 @@ p,
 ul {
   margin: 0;
 }
-p, label {
+p,
+label {
   color: #c499ff;
 }
-input, textarea {
+input,
+textarea {
   margin-left: 1rem;
 }
 

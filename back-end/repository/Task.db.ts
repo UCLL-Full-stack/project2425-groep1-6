@@ -35,6 +35,7 @@ const addTask = async (
 ): Promise<Task> => {
     try {
         roomId = 1; //Testing
+        status = 'Open'; //Testing
         /*const roomExists = await database.room.findUnique({ where: { id: roomId } });
         if (!roomExists) {
             throw new Error('Room with the specified ID does not exist.');
@@ -82,10 +83,36 @@ const getTasksByUserId = async (userId: number): Promise<Task[]> => {
     }
 };
 
+const updateTaskStatus = async (taskId: number, status: string): Promise<Task> => {
+    try {
+        const taskPrisma = await database.task.update({
+            where: { id: taskId },
+            data: { status },
+        });
+        return Task.from(taskPrisma);
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
+const deleteTask = async (id: number): Promise<void> => {
+    try {
+        await database.task.delete({
+            where: { id },
+        });
+    } catch (error) {
+        console.error(error);
+        throw new Error('Database error. See server log for details.');
+    }
+};
+
 export default {
     getAllTasks,
     getTaskById,
     addTask,
     assignTaskToUser,
     getTasksByUserId,
+    updateTaskStatus,
+    deleteTask,
 };

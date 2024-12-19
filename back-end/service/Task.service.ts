@@ -32,10 +32,20 @@ const getTasksByUserId = async (userId: number): Promise<Task[]> => {
     return taskDb.getTasksByUserId(userId);
 };
 
+const updateTaskStatus = async (taskId: number, status: string): Promise<Task> => {
+    return taskDb.updateTaskStatus(taskId, status);
+};
+
+const deleteTask = async (id: number): Promise<void> => {
+    await taskDb.deleteTask(id);
+};
+
 export default {
     getAllTasks,
     getTaskById,
     addTask,
     assignTaskToUser,
     getTasksByUserId,
+    updateTaskStatus,
+    deleteTask,
 };
