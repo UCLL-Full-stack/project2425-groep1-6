@@ -46,6 +46,8 @@
             "name": "Nombre:",
             "duration": "Duración:",
             "playingdates": "Fechas de reproducción:",
+            "remove": "Eliminar",
+            "add_date": "Agregar Fecha",
             "genre": "Género:",
             "summary": "Resumen:",
             "button": "Agregar película"

@@ -22,9 +22,9 @@ const MovieOverviewTable: React.FC<Props> = ({ movies }: Props) => {
           <th scope="col">{t("movies.overview.duration")}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody >
         {movies.map((movie, index) => (
-          <tr key={index}>
+          <tr className="hover:bg-white" key={index}>
             <td>{movie.name}</td>
             <td>{movie.genre}</td>
             <td>
