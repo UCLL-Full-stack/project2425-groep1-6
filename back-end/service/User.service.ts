@@ -51,10 +51,11 @@ const authenticate = async ({ username, password }: UserInput): Promise<Authenti
         throw new Error('Incorrect password');
     }
 
+    const id = user.getId();
     const role = user.getRole();
 
     return {
-        token: generateJWTtoken({ username, role } as UserInput),
+        token: generateJWTtoken({ id, username, role } as UserInput & { id: number }),
         username,
         role,
     };

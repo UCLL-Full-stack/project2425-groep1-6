@@ -24,8 +24,28 @@ const addTask = async (
     return taskDb.addTask(date, time, description, status, comment, roomId);
 };
 
+const assignTaskToUser = async (taskId: number, userId: number): Promise<Task> => {
+    return taskDb.assignTaskToUser(taskId, userId);
+};
+
+const getTasksByUserId = async (userId: number): Promise<Task[]> => {
+    return taskDb.getTasksByUserId(userId);
+};
+
+const updateTaskStatus = async (taskId: number, status: string): Promise<Task> => {
+    return taskDb.updateTaskStatus(taskId, status);
+};
+
+const deleteTask = async (id: number): Promise<void> => {
+    await taskDb.deleteTask(id);
+};
+
 export default {
     getAllTasks,
     getTaskById,
     addTask,
+    assignTaskToUser,
+    getTasksByUserId,
+    updateTaskStatus,
+    deleteTask,
 };

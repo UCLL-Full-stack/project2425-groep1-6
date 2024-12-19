@@ -91,99 +91,104 @@ const UserRegistrationForm: React.FC = () => {
   };
 
   return (
-    <>
-      <h3 className="px-0">Register</h3>
-      {statusMessages && (
-        <div className="row">
-          <ul className="list-none mb-3 mx-auto ">
-            {statusMessages.map(({ message, type }, index) => (
-              <li
-                key={index}
-                className={classNames({
-                  "text-red-800": type === "error",
-                  "text-green-800": type === "success",
-                })}
-              >
-                {message}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <form onSubmit={handleSubmit}>
-        <label
-          htmlFor="usernameInput"
-          className="block mb-2 text-sm font-medium"
-        >
-          Username:
-        </label>
-        <div className="block mb-2 text-sm font-medium">
-          <input
-            id="usernameInput"
-            type="text"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          />
-          {usernameError && (
-            <div className="text-red-800 ">{usernameError}</div>
-          )}
-        </div>
-        <label
-          htmlFor="passwordInput"
-          className="block mb-2 text-sm font-medium"
-        >
-          Password:
-        </label>
-        <div className="block mb-2 text-sm font-medium">
-          <input
-            id="passwordInput"
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          />
-          {passwordError && (
-            <div className="text-red-800 ">{passwordError}</div>
-          )}
-        </div>
-        <label htmlFor="emailInput" className="block mb-2 text-sm font-medium">
-          Email:
-        </label>
-        <div className="block mb-2 text-sm font-medium">
-          <input
-            id="emailInput"
-            type="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          />
-          {emailError && <div className="text-red-800 ">{emailError}</div>}
-        </div>
-        <label htmlFor="roleInput" className="block mb-2 text-sm font-medium">
-          Role:
-        </label>
-        <div className="block mb-2 text-sm font-medium">
-          <select
-            id="roleInput"
-            value={role}
-            onChange={(event) => setRole(event.target.value)}
-            className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+    <div className="py-8">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md mx-auto my-4">
+        <h3 className="text-center text-xl font-bold">Register</h3>
+        {statusMessages && (
+          <div className="row">
+            <ul className="list-none mb-3 mx-auto">
+              {statusMessages.map(({ message, type }, index) => (
+                <li
+                  key={index}
+                  className={classNames({
+                    "text-red-800": type === "error",
+                    "text-green-800": type === "success",
+                  })}
+                >
+                  {message}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
+          <label
+            htmlFor="usernameInput"
+            className="block mb-2 text-sm font-medium"
           >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-            <option value="guest">Guest</option>
-            <option value="worker">Worker</option>
-          </select>
-        </div>
-        <button
-          className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-          type="submit"
-        >
-          Register
-        </button>
-      </form>
-    </>
+            Username:
+          </label>
+          <div className="block mb-2 text-sm font-medium">
+            <input
+              id="usernameInput"
+              type="text"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {usernameError && (
+              <div className="text-red-800 ">{usernameError}</div>
+            )}
+          </div>
+          <label
+            htmlFor="passwordInput"
+            className="block mb-2 text-sm font-medium"
+          >
+            Password:
+          </label>
+          <div className="block mb-2 text-sm font-medium">
+            <input
+              id="passwordInput"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {passwordError && (
+              <div className="text-red-800 ">{passwordError}</div>
+            )}
+          </div>
+          <label
+            htmlFor="emailInput"
+            className="block mb-2 text-sm font-medium"
+          >
+            Email:
+          </label>
+          <div className="block mb-2 text-sm font-medium">
+            <input
+              id="emailInput"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+            {emailError && <div className="text-red-800 ">{emailError}</div>}
+          </div>
+          <label htmlFor="roleInput" className="block mb-2 text-sm font-medium">
+            Role:
+          </label>
+          <div className="block mb-2 text-sm font-medium">
+            <select
+              id="roleInput"
+              value={role}
+              onChange={(event) => setRole(event.target.value)}
+              className="border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+              <option value="guest">Guest</option>
+              <option value="worker">Worker</option>
+            </select>
+          </div>
+          <button
+            className="w-full text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            type="submit"
+          >
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
   );
 };
 

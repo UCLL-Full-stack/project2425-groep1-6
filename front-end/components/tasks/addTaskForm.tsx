@@ -36,9 +36,9 @@ const AddTaskForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 mb-8">
       <div>
-        <label className="block text-sm font-medium text-gray-700">Date</label>
+        <label className="block text-sm font-medium text-white">Date</label>
         <input
           type="date"
           name="date"
@@ -48,7 +48,7 @@ const AddTaskForm: React.FC = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">Time</label>
+        <label className="block text-sm font-medium text-white">Time</label>
         <input
           type="time"
           name="time"
@@ -58,7 +58,7 @@ const AddTaskForm: React.FC = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-sm font-medium text-white">
           Description
         </label>
         <textarea
@@ -69,21 +69,7 @@ const AddTaskForm: React.FC = () => {
         />
       </div>
       <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Status
-        </label>
-        <input
-          type="text"
-          name="status"
-          value={task.status}
-          onChange={handleChange}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm"
-        />
-      </div>
-      <div>
-        <label className="block text-sm font-medium text-gray-700">
-          Comment
-        </label>
+        <label className="block text-sm font-medium text-white">Comment</label>
         <textarea
           name="comment"
           value={task.comment}
