@@ -317,13 +317,17 @@ taskRouter.put('/:id/status', async (req: Request, res: Response, next: NextFunc
  *       500:
  *         description: Internal server error.
  */
-taskRouter.delete('/:id', async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        await taskService.deleteTask(Number(req.params.id));
-        res.status(200).json({ message: 'Task deleted successfully' });
-    } catch (error) {
-        next(error);
+taskRouter.delete(
+    '/:id',
+    async (req: Request & { auth?: any }, res: Response, next: NextFunction) => {
+        try {
+            const user = req.auth;
+            await taskService.deleteTask(Number(req.params.id), user);
+            res.status(200).json({ message: 'Task deleted successfully' });
+        } catch (error) {
+            next(error);
+        }
     }
-});
+);
 
 export { taskRouter };

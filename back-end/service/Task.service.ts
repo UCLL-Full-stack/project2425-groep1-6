@@ -36,8 +36,12 @@ const updateTaskStatus = async (taskId: number, status: string): Promise<Task> =
     return taskDb.updateTaskStatus(taskId, status);
 };
 
-const deleteTask = async (id: number): Promise<void> => {
-    await taskDb.deleteTask(id);
+const deleteTask = async (id: number, user: { username: string; role: string }): Promise<void> => {
+    if (user.role === 'admin') {
+        return taskDb.deleteTask(id);
+    } else {
+        throw new Error('Forbidden: Admins only');
+    }
 };
 
 export default {
