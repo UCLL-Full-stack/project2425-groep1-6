@@ -7,13 +7,16 @@ const Header: React.FC = () => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
+  const [userRole, setUserRole] = useState(""); // Add userRole state
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const user = localStorage.getItem("loggedInUser");
       if (user) {
+        const parsedUser = JSON.parse(user);
         setIsLoggedIn(true);
-        setUserName(JSON.parse(user).username);
+        setUserName(parsedUser.username);
+        setUserRole(parsedUser.role); // Set userRole state
       } else {
         setIsLoggedIn(false);
       }
@@ -58,7 +61,10 @@ const Header: React.FC = () => {
             <>
               {[
                 { href: "/movies", label: "Movies" },
-                { href: "/tasks", label: "Tasks" },
+                // Conditionally render the "Tasks" link based on userRole
+                ...(userRole === "admin" || userRole === "worker"
+                  ? [{ href: "/tasks", label: "Tasks" }]
+                  : []),
               ].map((link) => (
                 <Link
                   key={link.href}
