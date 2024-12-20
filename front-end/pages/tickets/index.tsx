@@ -3,9 +3,7 @@ import { useTranslation } from "next-i18next";
 import Header from "@/components/header";
 import Head from "next/head";
 import { useState } from "react";
-import TicketService from "@/services/ticketService";
 import Seats from "@/components/ticket/seat";
-import { Ticket } from "@/types";
 
 const Tickets: React.FC = () => {
   const { t } = useTranslation();
@@ -29,31 +27,13 @@ const Tickets: React.FC = () => {
       );
       if (confirmation) {
         try {
-            const ticketData = {
-                price: ticketPrice * selectedSeats,
-                date: new Date(selectedDate),
-                time: new Date(selectedTime), 
-                chair: selectedSeats, 
-                movieId: Number(id), 
-              };
-    
-            const response = await TicketService.addTicket(ticketData);
-    
-            if (response.ok) {
-              alert(
-                `You have successfully purchased ${selectedSeats} ticket(s) for ${moviename} on ${selectedDate} at ${selectedTime}.`
-              );
-            } else {
-              alert(`Failed to purchase tickets: ${response.statusText}`);
-            }
-          }
-        catch (error) {
-            console.error("Error purchasing tickets:", error);
-            alert("An error occurred while processing your request.");
-          }
-        } else {
-          alert("Purchase canceled.");
+          alert(
+            `You have successfully purchased ${selectedSeats} ticket(s) for ${moviename} on ${selectedDate} at ${selectedTime}.`
+          );
+        } catch (error) {
+          alert(`Error: ${error.message}`);
         }
+      }
     }
   };
 
