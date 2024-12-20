@@ -114,7 +114,7 @@ const UserRegistrationForm: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <label
             htmlFor="usernameInput"
-            className="block mb-2 text-sm font-medium"
+            className="block mb-2 text-sm font-medium text-black"
           >
             Username:
           </label>
@@ -132,7 +132,7 @@ const UserRegistrationForm: React.FC = () => {
           </div>
           <label
             htmlFor="passwordInput"
-            className="block mb-2 text-sm font-medium"
+            className="block mb-2 text-sm font-medium text-black"
           >
             Password:
           </label>
@@ -150,7 +150,7 @@ const UserRegistrationForm: React.FC = () => {
           </div>
           <label
             htmlFor="emailInput"
-            className="block mb-2 text-sm font-medium"
+            className="block mb-2 text-sm font-medium text-black"
           >
             Email:
           </label>
@@ -164,7 +164,10 @@ const UserRegistrationForm: React.FC = () => {
             />
             {emailError && <div className="text-red-800 ">{emailError}</div>}
           </div>
-          <label htmlFor="roleInput" className="block mb-2 text-sm font-medium">
+          <label
+            htmlFor="roleInput"
+            className="block mb-2 text-sm font-medium text-black"
+          >
             Role:
           </label>
           <div className="block mb-2 text-sm font-medium">

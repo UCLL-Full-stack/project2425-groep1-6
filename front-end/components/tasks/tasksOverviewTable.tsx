@@ -114,7 +114,7 @@ const TasksOverviewTable: React.FC = () => {
     <div className="mb-8">
       {" "}
       {/* Add margin-bottom class here */}
-      <table className="min-w-full divide-y divide-gray-200">
+      <table className="min-w-full divide-y divide-gray-200 text-black">
         <thead className="bg-gray-50">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -140,17 +140,21 @@ const TasksOverviewTable: React.FC = () => {
         <tbody className="bg-white divide-y divide-gray-200">
           {tasks.map((task) => (
             <tr key={task.id}>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-4 whitespace-nowrap text-black">
                 {new Date(task.date).toDateString()}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-4 whitespace-nowrap text-black">
                 {new Date(task.time).toLocaleTimeString()}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-4 whitespace-nowrap text-black">
                 {task.description}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">{task.status}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{task.comment}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-black">
+                {task.status}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-black">
+                {task.comment}
+              </td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
                   className={`px-4 py-2 rounded ${
