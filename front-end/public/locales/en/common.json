@@ -46,6 +46,8 @@
             "name": "Name:",
             "duration": "Duration:",
             "playingdates": "Playing Dates:",
+            "remove":"Remove",
+            "add_date":"Add Date",
             "genre": "Genre:",
             "summary": "Summary:",
             "button": "Add Movie"

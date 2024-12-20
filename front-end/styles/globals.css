@@ -54,6 +54,12 @@ ul {
   margin: 0;
 }
 p,
+label,
+td,
+th,
+span {
+  color: #c499ff;
+}
 input,
 textarea {
   margin-left: 1rem;
