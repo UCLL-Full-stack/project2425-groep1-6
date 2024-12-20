@@ -11,29 +11,33 @@ const MovieForm: React.FC = () => {
   const [genre, setGenre] = useState<string>("");
   const [summary, setSummary] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
   const { t } = useTranslation();
 
   const handleAddMovie = async (event: React.FormEvent) => {
     event.preventDefault();
     setError("");
+    setSuccess("");
 
     const totalDuration = new Date();
     totalDuration.setHours(Number(hours));
     totalDuration.setMinutes(Number(minutes));
-    const validPlayingDates = playingdates.filter(date => date.trim() !== "");
-
-
+    const validPlayingDates = playingdates.filter((date) => date.trim() !== "");
 
     const newMovie: Movie = {
       name,
       duration: totalDuration,
-      playingdates: validPlayingDates.map(date => new Date(date)),
+      playingdates: validPlayingDates.map((date) => new Date(date)),
       genre,
       summary,
     };
 
     try {
-      const response = await MovieService.addMovie(newMovie);
+      const token = sessionStorage.getItem("loggedInUserToken");
+      if (!token) {
+        throw new Error("No token found");
+      }
+      const response = await MovieService.addMovie(newMovie, token);
       if (!response.ok) {
         throw new Error("Failed to create movie");
       }
@@ -45,6 +49,10 @@ const MovieForm: React.FC = () => {
       setPlayingdates([""]);
       setGenre("");
       setSummary("");
+      setSuccess("Movie created successfully!");
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       setError((error as Error).message);
     }
@@ -67,6 +75,7 @@ const MovieForm: React.FC = () => {
   return (
     <form onSubmit={handleAddMovie} className="block w-full">
       {error && <p style={{ color: "red" }}>{error}</p>}
+      {success && <p style={{ color: "green" }}>{success}</p>}
       <div className="p-1 block mb-2 text-sm font-medium">
         <label>
           {t("movies.form.name")}
