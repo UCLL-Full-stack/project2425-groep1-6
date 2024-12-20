@@ -210,22 +210,6 @@ async function main() {
                 role: 'user',
             },
         }),
-        prisma.user.create({
-            data: {
-                username: 'admin2',
-                password: await bcrypt.hash('password123', 12),
-                email: 'admin2@example.com',
-                role: 'admin',
-            },
-        }),
-        prisma.user.create({
-            data: {
-                username: 'guest2',
-                password: await bcrypt.hash('password123', 12),
-                email: 'guest2@example.com',
-                role: 'guest',
-            },
-        }),
     ]);
 
     console.log('Seeding completed successfully!');
